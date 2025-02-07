@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Issue</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- تضمين مكتبة Tailwind CSS لتنسيق الصفحة -->
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold text-center mb-4" id="modalTitle">Add Issue</h2> <!-- عنوان النموذج -->
+        <form id="issueForm"> <!-- نموذج إدخال المشكلة -->
+            <label class="block mb-2">Title</label>
+            <input type="text" id="issueTitle" class="w-full p-2 border rounded mb-3" placeholder="Enter issue title" required>
+
+            <label class="block mb-2">Description</label>
+            <textarea id="issueDescription" class="w-full p-2 border rounded mb-3" placeholder="Enter issue description" required></textarea>
+
+            <label class="block mb-2">Status</label>
+            <select id="issueStatus" class="w-full p-2 border rounded mb-3" required>
+                <option value="open">Open</option>
+                <option value="in_progress">In Progress</option>
+                <option value="closed">Closed</option>
+            </select>
+
+            <label class="block mb-2">User</label>
+            <input type="text" id="issueUser" class="w-full p-2 border rounded mb-3" placeholder="Enter user" required>
+
+            <button type="submit" class="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 transition">Save Issue</button> <!-- زر حفظ المشكلة -->
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search); // الحصول على بارامترات URL
+        const issueId = urlParams.get('id'); // استخراج معرف المشكلة من URL
+        
+        if (issueId) {
+            document.getElementById('modalTitle').innerText = 'Edit Issue'; // تغيير العنوان إلى "تحرير المشكلة"
+            // جلب تفاصيل المشكلة للتعديل
+            fetchIssue(issueId);
+        }
+
+        // وظيفة لجلب تفاصيل المشكلة
+        async function fetchIssue(issueId) {
+            try {
+                const response = await fetch(`https://your-api-endpoint.com/api/issues/${issueId}`); // جلب البيانات من API
+                const data = await response.json(); // تحويل الاستجابة إلى كائن JSON
+
+                if (response.ok) {
+                    // ملء حقول النموذج ببيانات المشكلة
+                    document.getElementById('issueTitle').value = data.title;
+                    document.getElementById('issueDescription').value = data.description;
+                    document.getElementById('issueStatus').value = data.status;
+                    document.getElementById('issueUser').value = data.user;
+                } else {
+                    alert('Error fetching issue'); // رسالة خطأ عند الفشل في جلب المشكلة
+                }
+            } catch (error) {
+                console.error(error); // تسجيل الخطأ في وحدة التحكم
+                alert('An error occurred'); // عرض رسالة خطأ عامة
+            }
+        }
+
+        // إضافة مستمع لحدث إرسال النموذج
+        document.getElementById('issueForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // منع إعادة تحميل الصفحة عند إرسال النموذج
+
+            // الحصول على بيانات النموذج
+            const title = document.getElementById('issueTitle').value;
+            const description = document.getElementById('issueDescription').value;
+            const status = document.getElementById('issueStatus').value;
+            const user = document.getElementById('issueUser').value;
+
+            const issueData = { title, description, status, user }; // تجميع البيانات في كائن
+
+            if (issueId) {
+                // تحديث المشكلة الموجودة
+                await updateIssue(issueId, issueData);
+            } else {
+                // إضافة مشكلة جديدة
+                await addIssue(issueData);
+            }
+        });
+
+        // وظيفة لتحديث المشكلة
+        async function updateIssue(issueId, issueData) {
+            try {
+                const response = await fetch(`https://your-api-endpoint.com/api/issues/${issueId}`, {
+                    method: 'PUT', // استخدام طريقة التحديث
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(issueData), // تحويل البيانات إلى سلسلة نصية
+                });
+
+                if (response.ok) {
+                    alert('Issue updated successfully'); // رسالة نجاح عند التحديث
+                    window.location.href = '/my-issues'; // إعادة توجيه إلى قائمة المشاكل
+                } else {
+                    alert('Error updating issue'); // رسالة خطأ عند الفشل في التحديث
+                }
+            } catch (error) {
+                console.error(error); // تسجيل الخطأ في وحدة التحكم
+                alert('An error occurred'); // عرض رسالة خطأ عامة
+            }
+        }
+
+        // وظيفة لإضافة مشكلة جديدة
+        async function addIssue(issueData) {
+            try {
+                const response = await fetch('https://your-api-endpoint.com/api/issues', {
+                    method: 'POST', // استخدام طريقة الإضافة
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(issueData), // تحويل البيانات إلى سلسلة نصية
+                });
+
+                if (response.ok) {
+                    alert('Issue added successfully'); // رسالة نجاح عند الإضافة
+                    window.location.href = '/my-issues'; // إعادة توجيه إلى قائمة المشاكل
+                } else {
+                    alert('Error adding issue'); // رسالة خطأ عند الفشل في الإضافة
+                }
+            } catch (error) {
+                console.error(error); // تسجيل الخطأ في وحدة التحكم
+                alert('An error occurred'); // عرض رسالة خطأ عامة
+            }
+        }
+    </script>
+
+</body>
+</html>

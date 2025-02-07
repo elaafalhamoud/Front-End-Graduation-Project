@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- تضمين مكتبة Tailwind CSS لتنسيق الصفحة -->
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold text-center mb-4">Sign Up</h2> <!-- عنوان نموذج التسجيل -->
+        <form id="signUpForm"> 
+            <label class="block mb-2">User Name</label>
+            <input type="text" id="username" class="w-full p-2 border rounded mb-3" placeholder="Enter your name" required>
+            <label class="block mb-2">Email</label>
+            <input type="email" id="email" class="w-full p-2 border rounded mb-3" placeholder="Enter your email" required>
+            <label class="block mb-2">Password</label>
+            <input type="password" id="password" class="w-full p-2 border rounded mb-3" placeholder="Enter your password" required>
+            <label class="block mb-2">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="w-full p-2 border rounded mb-3" placeholder="Confirm your password" required>
+            <button type="submit" class="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 transition">Sign Up</button> <!-- زر التسجيل -->
+        </form>
+    </div>
+
+    <script>
+        // إضافة مستمع لحدث إرسال النموذج
+        document.getElementById('signUpForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // منع إعادة تحميل الصفحة عند إرسال النموذج
+
+            // الحصول على قيم المدخلات
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // فحص ما إذا كانت كلمات المرور متطابقة
+            if (password !== confirmPassword) {
+                alert('Passwords do not match'); // إذا كانت غير متطابقة، عرض رسالة
+                return; // إنهاء الدالة
+            }
+
+            const userData = { username, email, password }; // تجميع بيانات المستخدم في كائن
+
+            // إرسال البيانات إلى واجهة برمجة التطبيقات
+            try {
+                const response = await fetch('https://your-api-endpoint.com/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData), // تحويل كائن البيانات إلى سلسلة نصية
+                });
+
+                const result = await response.json(); // تحويل الاستجابة إلى كائن JSON
+                if (response.ok) {
+                    alert('Sign-up successful!'); // عرض رسالة نجاح
+                    window.location.href = '/login'; // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+                } else {
+                    alert('Error: ' + result.message); // عرض رسالة خطأ من الخادم
+                }
+            } catch (error) {
+                console.error(error); // تسجيل الخطأ في وحدة التحكم
+                alert('An error occurred during sign-up'); // عرض رسالة خطأ عامة
+            }
+        });
+    </script>
+</body>
+</html>
