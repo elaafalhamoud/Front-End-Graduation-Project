@@ -11,6 +11,14 @@ const endPoints = {
   deleteIssue: "/issues/",
 };
 
+/**
+ * يقوم بتسجيل الدخول باستخدام المعرف وكلمة المرور.
+ *
+ * @param {string} identifier - المعرف المستخدم لتسجيل الدخول.
+ * @param {string} password - كلمة المرور المستخدمة لتسجيل الدخول.
+ * @returns {Promise<Object>} - بيانات الاستجابة من الخادم بعد تسجيل الدخول بنجاح.
+ * @throws {Error} - يرمي خطأ في حالة فشل تسجيل الدخول.
+ */
 export const login = async (identifier, password) => {
   try {
     const response = await API.post(

@@ -1,0 +1,39 @@
+/* الأنماط العامة */
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* لإضافة تأثير الانتقال عند التبديل */
+}
+
+/* أنماط الوضع النهاري */
+body {
+  background-color: #fff;
+  color: #000;
+}
+
+/* أنماط الوضع الليلي */
+.dark-mode body {
+  background-color: #333;
+  color: #fff;
+}
+
+/* زر التبديل بين الثيمات */
+.theme-toggle-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #96dc99aa;
+
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* تأثير التمرير فوق الزر */
+.theme-toggle-btn:hover {
+  background-color: #13d31c97;
+  border-radius: 10px black;
+ 
+}
