@@ -1,0 +1,37 @@
+/* App.css */
+
+/* تنسيقات الوضع الفاتح */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; 
+        background-color: #f0f0f0; /* لون خلفية الفاتح */
+    color: #333; /* لون النص الفاتح */
+  }
+  
+  /* تنسيقات الوضع الداكن */
+  .dark-mode {
+    background-color: #333; /* لون خلفية الداكن */
+    color: #f0f0f0; /* لون النص الداكن */
+  }
+  
+  .App {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .theme-toggle-btn {
+    margin: 20px 0;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff; /* لون الزر */
+    color: white;
+    font-size: 16px;
+  }
+  
+  .theme-toggle-btn:hover {
+    background-color: #0056b3; /* لون الزر عند التمرير */
+  }
