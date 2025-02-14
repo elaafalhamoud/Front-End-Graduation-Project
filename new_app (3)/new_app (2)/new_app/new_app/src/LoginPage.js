@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Home from './Home'; // تأكد من أن الملف موجود
-import Posts from './PostsPage'; // استخدم PostsPage بدلاً من Posts
-import Register from './regist'; // تأكد من أن هذا الملف موجود
+import { useNavigate } from 'react-router-dom'; // استيراد useNavigate
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // تهيئة navigate
 
     const handleSubmit = (e) => {
         e.preventDefault(); // منع إعادة تحميل الصفحة عند إرسال النموذج
@@ -23,7 +22,7 @@ const Login = () => {
             localStorage.setItem('authToken', 'mockToken'); // حفظ رمز مميز تجريبي
             toast.success('تم تسجيل الدخول بنجاح!'); // رسالة نجاح
             setTimeout(() => {
-                window.location.href = '/my-issues'; // إعادة توجيه إلى صفحة المشاكل
+                navigate('/my-issues'); // إعادة توجيه إلى صفحة المشاكل
             }, 1000); // الانتظار لمدة ثانية قبل التوجيه
         } else {
             toast.error('البريد الإلكتروني أو كلمة المرور غير صحيحة'); // رسالة خطأ

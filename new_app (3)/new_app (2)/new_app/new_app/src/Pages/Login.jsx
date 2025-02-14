@@ -1,15 +1,15 @@
-import React ,{ useState } from "react";
+import React, { useState } from "react";
 import { login } from "../Services/authService.js";
+import { useNavigate } from "react-router-dom"; // استيراد useNavigate
 
 const Login = () => {
-  // تعريف حالة البيانات للنموذج
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    username: "",
   });
 
-  // دالة لتحديث حالة البيانات عند تغيير المدخلات
+  const navigate = useNavigate(); // تهيئة navigate
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -17,12 +17,14 @@ const Login = () => {
     });
   };
 
-  // دالة لإرسال البيانات عند الضغط على زر الإرسال
   const handleSubmit = async () => {
     try {
       const response = await login(formData.email, formData.password);
       console.log(response);
       localStorage.setItem("token0", response.jwt);
+      
+      // التوجيه إلى الصفحة الرئيسية بعد تسجيل الدخول بنجاح
+      navigate("/"); // أو أي مسار آخر تريده
     } catch (error) {
       console.log(error);
     }
@@ -47,9 +49,9 @@ const Login = () => {
               className="input-field"
               placeholder="Email address"
             />
-            <label htmlFor="email" className="input-label">
-              Email Address
-            </label>
+            {/*<label htmlFor="email" className="input-label">*/}
+            {/*  Email Address*/}
+            {/*</label>*/}
           </div>
 
           <div className="input-group">
@@ -63,9 +65,9 @@ const Login = () => {
               className="input-field"
               placeholder="Password"
             />
-            <label htmlFor="password" className="input-label">
-              Password
-            </label>
+            {/*<label htmlFor="password" className="input-label">*/}
+            {/*  Password*/}
+            {/*</label>*/}
           </div>
 
           <button onClick={handleSubmit} className="submit-btn">

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import IssueCard from "./IssueCard";
-import HomePage from "./HomePage";
-import LoginPage from "./LoginPage";
-import RegisterPage from "./RegisterPages";
-import DashboardPage from "./DashboardPage";
-import ProfilePage from "./ProfilePage";
-import PostsPage from "./PostsPage";
-import './App.css'; // استدعاء ملف CSS
+
+import "./app.css"
+import HomePage from "../HomePage";
+import LoginPage from "../LoginPage";
+import Register from "./Register";
+import DashboardPage from "../DashboardPage";
+import ProfilePage from "../ProfilePage"; // استدعاء ملف CSS
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -26,10 +26,10 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/posts" element={<PostsPage />} />
+          {/*    <Route path="/posts" element={<PostsPage />} />*/}
               <Route path="/IssueCard" element={<IssueCard />} />
             </Routes>
           </main>

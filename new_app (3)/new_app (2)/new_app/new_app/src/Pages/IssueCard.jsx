@@ -34,13 +34,24 @@ const IssueCard = ({
 
         <div className="controls">
           <div className="counter-group">
-            <button onClick={() => increaseCounter(id)} className="counter-btn">+</button>
+            <button
+              /*  onClick={() => increaseCounter(id)} */
+
+                className="counter-btn">+</button>
             <span className="counter-value">{counterValue}</span>
-            <button onClick={() => decreaseCounter(id)} className="counter-btn">-</button>
+            <button
+          /*      onClick={() => decreaseCounter(id)}*/
+
+                className="counter-btn">-</button>
           </div>
 
           <div className="buttons-group">
-            <button onClick={() => onDelete(documentId)} className="icon-btn delete-btn">🗑️</button>
+            <button
+           /*     onClick={
+            /!*  () => onDelete(documentId)*!/
+
+            }*/
+                    className="icon-btn delete-btn">🗑️</button>
             <Link to="/edit" className="icon-btn edit-btn">✏️</Link>
             <button onClick={showComments} className="icon-btn comments-btn">
               💬 <span className="comment-count">{CommentsNumber}</span>

@@ -51,9 +51,9 @@ const Register = () => {
                 className="input-field"
                 placeholder="Username"
               />
-              <label htmlFor="username" className="input-label">
+        {/*      <label htmlFor="username" className="input-label">
                 Username
-              </label>
+              </label>*/}
             </div>
 
             <div className="input-group">
@@ -67,9 +67,9 @@ const Register = () => {
                 className="input-field"
                 placeholder="Email address"
               />
-              <label htmlFor="email" className="input-label">
+           {/*   <label htmlFor="email" className="input-label">
                 Email Address
-              </label>
+              </label>*/}
             </div>
 
             <div className="input-group">
@@ -83,9 +83,9 @@ const Register = () => {
                 className="input-field"
                 placeholder="Password"
               />
-              <label htmlFor="password" className="input-label">
+        {/*      <label htmlFor="password" className="input-label">
                 Password
-              </label>
+              </label>*/}
             </div>
 
             <div className="input-group">
@@ -99,9 +99,9 @@ const Register = () => {
                 className="input-field"
                 placeholder="Repeat Password"
               />
-              <label htmlFor="repeatPassword" className="input-label">
+   {/*           <label htmlFor="repeatPassword" className="input-label">
                 Repeat Password
-              </label>
+              </label>*/}
             </div>
 
             <button onClick={handleSubmit} className="submit-btn">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className={isDarkMode ? "dark-mode" : ""}>
-      <BrowserRouter>
+      <Router>
         <button onClick={toggleTheme} className="theme-toggle-btn">
           {isDarkMode ? "تفعيل الوضع الفاتح" : "تفعيل الوضع الداكن"}
         </button>
@@ -26,7 +26,7 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           {/* يمكنك إضافة المزيد من المسارات هنا */}
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
